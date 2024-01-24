@@ -19,7 +19,9 @@ function Home () {
                 <p>The "Parliamentary Bill Tracker" is a user-friendly system developed using Flask and React, designed to monitor bills submitted to parliament. It maintains comprehensive records of sponsoring MPs, vote tallies, and legislative outcomes, providing a clear overview within a manageable platform.</p>
             </div>
             <div className="signup-button">
-                <button>Sign Up</button>
+                <Link to="/signup">
+                    <button>Sign Up</button>
+                </Link>
             </div>
         </div>
     )
