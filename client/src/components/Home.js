@@ -14,9 +14,9 @@ function Home () {
                 </Link>
             </div>
             <div className="content-text">
-                <p>Legislative bodies often face challenges in efficiently monitoring bills, sponsors, votes, and outcomes. Existing systems may lack simplicity or be cumbersome to manage, necessitating a streamlined and accessible tool.</p>
-                <h2>About</h2>
-                <p>The "Parliamentary Bill Tracker" is a user-friendly system developed using Flask and React, designed to monitor bills submitted to parliament. It maintains comprehensive records of sponsoring MPs, vote tallies, and legislative outcomes, providing a clear overview within a manageable platform.</p>
+                <p>Welcome to the Parliamentary Bill Tracker, a dedicated platform designed for Members of Parliament (MPs) to cast votes on crucial legislative matters. Whether you're an elected representative shaping policy or an engaged citizen keeping a pulse on governance, our platform ensures transparency and accessibility in the legislative decision-making process.</p>
+                <h2>About Parliamentary Bill Tracker</h2>
+                <p>The Parliamentary Bill Tracker is a specialized voting system tailored for Members of Parliament. It serves as a centralized hub for legislative voting, enabling MPs to cast their votes efficiently and providing citizens with real-time access to parliamentary decisions. Our platform bridges the gap between elected representatives and the public, fostering a more informed and engaged democracy.</p>
             </div>
             <div className="signup-button">
                 <Link to="/signup">
