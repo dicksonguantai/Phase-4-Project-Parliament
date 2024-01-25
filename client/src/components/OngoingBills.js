@@ -1,24 +1,18 @@
-import react from react
+import React, { useState } from 'react';
 
-function OngoingBills({name, affiliation, desc, votes,status}) {
+function OngoingBills({name, affiliation, description, status, upvotes, downvotes}) {
     return(
-        <div className="bills-container">
-            <div className="name">
-                <h2>{name}</h2>
+        <div className="ongoing-bills">
+            <h2>{name}</h2>
+            <p>Affiliation{affiliation}</p>
+            <p>Description{description}</p>
+            <p>Status{status}</p>
+            <div>
+                Upvotes: {upvotes} | Downvotes: {downvotes}
             </div>
-            <div className="affiliation">
-                <h2>{affiliation}</h2>
-            </div>
-            <div className="desc">
-                <h3>{desc}</h3>
-            </div>
-            <div className="votes">
-                <h3>{votes}</h3>
-            </div>
-            <div className="status">
-                <h3>{status}</h3>
-            </div>
-
         </div>
-    )
-}
+        
+    );
+};
+
+export default OngoingBills;
