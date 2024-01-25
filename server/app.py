@@ -205,6 +205,34 @@ class BillsByID(Resource):
         else:
             return {'message': 'User not authenticated'}, 401
         
+    def patch(self, bill_id):
+        user_id = session.get('user_id')
+
+        if not user_id:
+            return {'message': 'User not authenticated'}, 401
+        
+        bill = Bill.query.filter_by(id=bill_id).first()
+        if not bill:
+            return {'message': 'Bill not found'}, 404
+            
+        data = request.get_json()
+        if 'upvote' in data:
+            bill.upvotes += 1
+        elif 'downvote' in data:
+            bill.downvotes += 1
+        else:
+            return {'message': 'Invalid request'}, 400
+        
+        bill.outcome_status = bill.upvotes > bill.downvotes
+            
+        db.session.commit()
+        return {
+            'message': 'Vote casted successfully',
+            'upvotes': bill.upvotes,
+            'downvotes': bill.downvotes,
+            'outcome_status': bill.outcome_status
+        }, 200
+
 
 
 api.add_resource(Signup, '/signup', endpoint='signup')
