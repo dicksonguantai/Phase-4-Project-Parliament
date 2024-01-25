@@ -4,7 +4,7 @@ from sqlalchemy.schema import CheckConstraint
 
 from config import db, bcrypt
 
-class MP(db.Model):
+class MP(db.Model, SerializerMixin):
     __tablename__ = 'mps'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -16,7 +16,7 @@ class MP(db.Model):
     def __repr__(self):
         return f'<MP id={self.id} name={self.name} affiliation={self.affiliation}>'
 
-class Bill(db.Model):
+class Bill(db.Model, SerializerMixin):
     __tablename__ = 'bills'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -33,7 +33,7 @@ class Bill(db.Model):
     def __repr__(self):
         return f'<Bill id={self.id} title={self.title} outcome_status={self.outcome_status}>'
 
-class User(db.Model):
+class User(db.Model, SerializerMixin):
     __tablename__ = 'users'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -57,7 +57,7 @@ class User(db.Model):
     def __repr__(self):
         return f'<User id={self.id} name={self.name} role={self.role} email={self.email}>'
 
-class VotingRecord(db.Model):
+class VotingRecord(db.Model, SerializerMixin):
     __tablename__ = 'voting_records'
 
     id = db.Column(db.Integer, primary_key=True)
