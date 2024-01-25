@@ -22,12 +22,3 @@ db.init_app(app)
 bcrypt = Bcrypt(app)
 
 api = Api(app)
-
-# ... (rest of your code)
-
-if __name__ == '__main__':
-    # Use Gunicorn to run the app
-    import os
-    host = os.environ.get('HOST', '0.0.0.0')
-    port = int(os.environ.get('PORT', 5555))
-    app.run(host=host, port=port, debug=True)
