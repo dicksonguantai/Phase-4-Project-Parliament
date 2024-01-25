@@ -9,6 +9,7 @@ function Home () {
                 <h1>VOTING SYSTEM</h1>
             </header>
             <div className="signIn-Button">
+                <span className="user-text">Existing User?</span>
                 <Link to="/Login">
                     <button>Sign In</button>
                 </Link>
@@ -19,6 +20,7 @@ function Home () {
                 <p>The Parliamentary Bill Tracker is a specialized voting system tailored for Members of Parliament. It serves as a centralized hub for legislative voting, enabling MPs to cast their votes efficiently and providing citizens with real-time access to parliamentary decisions. Our platform bridges the gap between elected representatives and the public, fostering a more informed and engaged democracy.</p>
             </div>
             <div className="signup-button">
+                <span className="user-text">New User?</span>
                 <Link to="/signup">
                     <button>Sign Up</button>
                 </Link>
