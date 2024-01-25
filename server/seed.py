@@ -37,10 +37,12 @@ def seed_database():
             password = fake.password()
             if fake.boolean():  # Randomly assign role (user or mp)
                 role = 'mp'
+                # Select a random MP's name for the user
+                mp_name = fake.random_element(elements=[mp.name for mp in mps])
+                user = User(first_name=mp_name.split()[0], last_name=mp_name.split()[1], role=role, password=fake.password(), email=fake.email())
             else:
                 role = 'user'
-            password_hash = bcrypt.generate_password_hash(password.encode('utf-8')).decode('utf-8')
-            user = User(first_name=first_name, last_name=last_name, role=role, password=password_hash, email=email)
+                user = User(first_name=first_name, last_name=last_name, role=role, password=fake.password(), email=fake.email())
             users.append(user)
             db.session.add(user)
         db.session.commit()
