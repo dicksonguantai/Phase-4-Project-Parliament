@@ -6,13 +6,13 @@ function NavBar () {
         <nav>
             <ul>
                 <li>
-                    <Link to="bill-proposal-form">Bill Proposal</Link>
+                    <Link to="/bill-proposal-form">Bill Proposal</Link>
                 </li>
                 <li>
                     <Link to="/ongoing-bills">Ongoing Bills</Link>
                 </li>
                 <li>
-                    <Link to="/bills-details">Bill Details</Link>
+                    <Link to="/bills/:bill_Id">Bill Details</Link>
                 </li>
             </ul>
         </nav>

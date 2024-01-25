@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
-function BillDetails ({ match })  {
+function BillDetails ()  {
+  const { id } = useParams();
   const [billDetails, setBillDetails] = useState(null);
 
   useEffect(() => {
-    const fetchBillDetails = async () => {
-      try {
-        const response = await fetch(`https://api.example.com/bills/${match.params.bill_Id}`);
-        const data = await response.json();
-        setBillDetails(data);
-      } catch (error) {
-        console.error('Error fetching bill details:', error);
-      }
-    };
+    fetch(`/bills/${id}`)
+      .then((r) => {
+        if (r.ok) {
+          return r.json();
+        } else {
+          throw new Error("Error fetching bill details");
+        }
+      })
+      .then(setBillDetails)
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [id]);
 
-    fetchBillDetails();
-  }, [match.params.bill_Id]);
 
   if (!billDetails) {
     return <div>Loading...</div>;
