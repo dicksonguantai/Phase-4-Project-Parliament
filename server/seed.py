@@ -23,7 +23,9 @@ def seed_database():
         # Seed MPs
         mps = []
         for _ in range(20):
-            mp = MP(name=fake.name(), affiliation=fake.word(), constituency=fake.word())
+            first_name = fake.first_name()
+            last_name = fake.last_name()
+            mp = MP(first_name=first_name, last_name=last_name, affiliation=fake.word(), constituency=fake.word())
             mps.append(mp)
             db.session.add(mp)
         db.session.commit()
@@ -34,15 +36,15 @@ def seed_database():
             first_name = fake.first_name()
             last_name = fake.last_name()
             email = fake.email()
-            password = fake.password()
+            password_hash = fake.password()  # Changed variable name to reflect the attribute change
             if fake.boolean():  # Randomly assign role (user or mp)
                 role = 'mp'
                 # Select a random MP's name for the user
-                mp_name = fake.random_element(elements=[mp.name for mp in mps])
-                user = User(first_name=mp_name.split()[0], last_name=mp_name.split()[1], role=role, password=fake.password(), email=fake.email())
+                mp = fake.random_element(elements=mps)
+                user = User(first_name=mp.first_name, last_name=mp.last_name, role=role, _password_hash=password_hash, email=fake.email())
             else:
                 role = 'user'
-                user = User(first_name=first_name, last_name=last_name, role=role, password=fake.password(), email=fake.email())
+                user = User(first_name=first_name, last_name=last_name, role=role, _password_hash=password_hash, email=fake.email())
             users.append(user)
             db.session.add(user)
         db.session.commit()

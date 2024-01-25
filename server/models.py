@@ -8,7 +8,8 @@ class MP(db.Model, SerializerMixin):
     __tablename__ = 'mps'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=False)
+    first_name = db.Column(db.String(255), nullable=False)
+    last_name = db.Column(db.String(255), nullable=False)
     affiliation = db.Column(db.String(255))
     constituency = db.Column(db.String(255))
     bills = db.relationship('Bill', back_populates='mp')
@@ -40,7 +41,7 @@ class User(db.Model, SerializerMixin):
     first_name = db.Column(db.String(255), nullable=False)
     last_name = db.Column(db.String(255), nullable=False)
     role = db.Column(db.String(50), nullable=False)
-    password = db.Column(db.String(255), nullable=False)
+    _password_hash = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
 
     @hybrid_property
@@ -53,7 +54,7 @@ class User(db.Model, SerializerMixin):
         self._password_hash = password_hash.decode('utf-8')
 
     def authenticate(self, password):
-        return bcrypt.check_password_hash(self.password_hash, password.encode('utf-8'))
+        return bcrypt.check_password_hash(self._password_hash, password.encode('utf-8'))
 
     def __repr__(self):
         return f'<User id={self.id} name={self.name} role={self.role} email={self.email}>'

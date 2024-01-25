@@ -37,9 +37,13 @@ class Signup(Resource):
                 'message': 'User created successfully'
             }, 201
 
-        except IntegrityError:
+        except IntegrityError as e:
             db.session.rollback()
-            return {'message': 'User already exists'}, 422
+            error_info = str(e.orig)
+            if 'unique constraint' in error_info.lower():
+                return {'message': 'User with this email already exists'}, 422
+            else:
+                return {'message': 'An error occurred during registration'}, 500
         
     def patch(self):
         try:
@@ -118,6 +122,27 @@ class Logout(Resource):
         }, 200
     
 
+class Bills(Resource):
+    def get(self):
+        user_id = session.get('user_id')
+
+        if user_id:
+            bills = Bill.query.all()
+
+            return {
+                'bills': [{
+                    'title': bill.title,
+                    'upvotes': bill.upvotes,
+                    'downvotes': bill.downvotes,
+                    'outcome_status': bill.outcome_status,
+                    'mp_first_name': bill.mp.first_name,
+                    'mp_last_name': bill.mp.last_name,
+                    'mp_affiliation': bill.mp.affiliation
+                } for bill in bills]
+            }, 200
+        
+        else:
+            return {'message': 'Please log in'}, 401
 
 
 
@@ -126,6 +151,24 @@ api.add_resource(Signup, '/signup', endpoint='signup')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(Logout, '/logout', endpoint='logout')
+api.add_resource(Bills, '/bills', endpoint='bills')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
+
+
+
+
+
+
+
+
+
+
+
+
+    # "first_name": "Mwanzia",
+    # "last_name": "Muli",
+    # "email": "samuelmuli@gmail.com",
+    # "password": "MuliSam",
+    # "role": "user"
