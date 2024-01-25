@@ -1,15 +1,18 @@
 // src/App.js
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import LoginForm from './components/LoginForm';
-import BillForm from './components/BillForm';
-import OngoingBills from './components/BillForm';
-
+import Home from './components/Home';
 
 function App() {
   return (
-    <div className="App">    
-      <LoginForm />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/login" element={<LoginForm/>}/>
+        <Route path="/signup" element={<LoginForm/>}/>
+      </Routes>
+    </Router>
   );
 }
 
