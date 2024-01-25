@@ -1,11 +1,26 @@
-from flask import request, session
-from flask_restful import Resource
+from flask import Flask, request, session
+from flask_restful import Resource, Api
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from flask_bcrypt import Bcrypt
+from sqlalchemy import MetaData
 from sqlalchemy.exc import IntegrityError
 from datetime import datetime
 
-from config import app, db, api
-from models import MP, Bill, User, VotingRecord
+app = Flask(__name__)
+app.secret_key = b'Y\xf1Xz\x00\xad|eQ\x80t \xca\x1a\x10K'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.json.compact = False
 
+metadata = MetaData(naming_convention={
+    "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
+})
+db = SQLAlchemy(metadata=metadata)
+migrate = Migrate(app, db)
+db.init_app(app)
+bcrypt = Bcrypt(app)
+api = Api(app)
 
 class Signup(Resource):
     def post(self):
@@ -243,7 +258,9 @@ api.add_resource(Bills, '/bills', endpoint='bills')
 api.add_resource(BillsByID, '/bills/<int:bill_id>', endpoint='bills_by_id')
 
 if __name__ == '__main__':
-    app.run(port=5555, debug=True)
-
+    import os
+    host = os.environ.get('HOST', '0.0.0.0')
+    port = int(os.environ.get('PORT', 5555))
+    app.run(host=host, port=port, debug=True)
 
 
