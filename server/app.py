@@ -1,6 +1,7 @@
 from flask import request, session
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
+from datetime import datetime
 
 from config import app, db, api
 from models import MP, Bill, User, VotingRecord
@@ -143,8 +144,67 @@ class Bills(Resource):
         
         else:
             return {'message': 'Please log in'}, 401
+        
+        
+    def post(self):
+
+        user_id = session.get('user_id')
+
+        if user_id:
+            title = request.json['title']
+            description = request.json['description']
+            mp_first_name = request.json['mp_first_name']
+            mp_last_name = request.json['mp_last_name']
+            mp_affiliation = request.json['mp_affiliation']
+            mp_constituency = request.json['mp_constituency']
+
+            mp = MP.query.filter_by(first_name=mp_first_name, last_name=mp_last_name).first()
+
+            if not mp:
+                return {'message': 'MP not found'}, 404
+
+            bill = Bill(
+                title = title,
+                description = description,
+                mp_id = mp.id,
+                submission_date = datetime.now(),
+            )
+
+            db.session.add(bill)
+            db.session.commit()
+
+            return {
+                'message': 'Bill created successfully'
+            }, 201
+
+        else:
+            return {'message': 'User not authenticated'}, 401
 
 
+class BillsByID(Resource):
+    def get(self, bill_id):
+
+        user_id = session.get('user_id')
+
+        if user_id:
+
+            bill = Bill.query.filter_by(id=bill_id).first()
+
+            if bill:
+                return {
+                    'title': bill.title,
+                    'description': bill.description,
+                    'submission_date': bill.submission_date.isoformat(),
+                    'upvotes': bill.upvotes,
+                    'downvotes': bill.downvotes,
+                    'outcome_status': bill.outcome_status
+                }, 200
+            else:
+                return {'message': 'Bill not found'}, 404
+        
+        else:
+            return {'message': 'User not authenticated'}, 401
+        
 
 
 api.add_resource(Signup, '/signup', endpoint='signup')
@@ -152,6 +212,7 @@ api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(Logout, '/logout', endpoint='logout')
 api.add_resource(Bills, '/bills', endpoint='bills')
+api.add_resource(BillsByID, '/bills/<int:bill_id>', endpoint='bills_by_id')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
