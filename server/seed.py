@@ -5,8 +5,18 @@ from faker import Faker
 
 fake = Faker()
 
+def clear_data():
+    db.session.query(VotingRecord).delete()
+    db.session.query(Bill).delete()
+    db.session.query(User).delete()
+    db.session.query(MP).delete()
+    db.session.commit()
+
 def seed_database():
     with app.app_context():
+        # Clear existing data
+        clear_data()
+
         # Create tables
         db.create_all()
 
@@ -21,14 +31,16 @@ def seed_database():
         # Seed Users
         users = []
         for _ in range(30):
+            first_name = fake.first_name()
+            last_name = fake.last_name()
+            email = fake.email()
+            password = fake.password()
             if fake.boolean():  # Randomly assign role (user or mp)
                 role = 'mp'
-                # Select a random MP's name for the user
-                mp_name = fake.random_element(elements=[mp.name for mp in mps])
-                user = User(name=mp_name, role=role, password=fake.password(), email=fake.email())
             else:
                 role = 'user'
-                user = User(name=fake.name(), role=role, password=fake.password(), email=fake.email())
+            password_hash = bcrypt.generate_password_hash(password.encode('utf-8')).decode('utf-8')
+            user = User(first_name=first_name, last_name=last_name, role=role, password=password_hash, email=email)
             users.append(user)
             db.session.add(user)
         db.session.commit()
