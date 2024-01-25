@@ -1,12 +1,12 @@
 from flask import request, session
-from flask_restful import Api
+from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 
 from config import app, db, api
 from models import MP, Bill, User, VotingRecord
 
 
-class SignUp(Resource):
+class Signup(Resource):
     def post(self):
 
         try:
@@ -15,6 +15,9 @@ class SignUp(Resource):
             email = request.json['email']
             password = request.json['password']
             role = request.json['role']
+
+            if not first_name or not last_name or not password:
+                return {'message': 'Invalid user data'}, 422
 
             user = User(
                 first_name=first_name,
@@ -37,6 +40,10 @@ class SignUp(Resource):
         except IntegrityError:
             db.session.rollback()
             return {'message': 'User already exists'}, 422
+
+
+
+api.add_resource(Signup, '/signup', endpoint='signup')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
