@@ -1,24 +1,57 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react';
 
 const BillForm = () => {
   const [formData, setFormData] = useState({
     title: '',
     firstName: '',
     lastName: '',
-    description: '', 
+    description: '',
     affiliation: '',
     constituency: '',
-  })
+  });
+//ku POST data kutoka kwa form ni apa sasa
 
-  const handleChange = e => {
-    const {name, value} = e.target
-    setFormData({...formData, [name]: value})
-  }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-  const handleSubmit = e => {
-    e.preventDefault()
-    console.log('Form Data:', formData)
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('http://127.0.0.1:5000/bills', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: formData.title,
+          description: formData.description,
+          mp_first_name: formData.firstName,
+          mp_last_name: formData.lastName,
+          mp_affiliation: formData.affiliation,
+          mp_constituency: formData.constituency,
+        }),
+      });
+
+      if (response.ok) {
+        console.log('Bill submitted successfully');
+        setFormData({
+          title: '',
+          firstName: '',
+          lastName: '',
+          description: '',
+          affiliation: '',
+          constituency: '',
+        });
+      } else {
+        console.error('Failed to submit bill');
+      }
+    } catch (error) {
+      console.error('Error:', error.message);
+    }
+  };
 
   return (
     <div>
@@ -63,7 +96,7 @@ const BillForm = () => {
           onChange={handleChange}
         ></textarea>
         <br />
-        <label htmlFor="affiliation">Mp Affiliation:</label>
+        <label htmlFor="affiliation">MP Affiliation:</label>
         <br />
         <input
           type="text"
@@ -73,7 +106,7 @@ const BillForm = () => {
           onChange={handleChange}
         />
         <br />
-        <label htmlFor="constituency">Mp Constituency:</label>
+        <label htmlFor="constituency">MP Constituency:</label>
         <br />
         <input
           type="text"
@@ -86,8 +119,7 @@ const BillForm = () => {
         <input type="submit" value="Submit" />
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default BillForm
-//nimebakisha logic ya kuhandle data ya backend
+export default BillForm;
