@@ -1,13 +1,24 @@
 header {
   text-align: left;
   padding: 10px;
-  background-color: #eee;
 }
 
 body {
-  font-family: 'Arial', sans-serif;
+  background-image: url('https://images.unsplash.com/photo-1554034483-04fda0d3507b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+html, body {
   margin: 0;
   padding: 0;
+  height: 100%;
 }
 
 .signIn-Button {
@@ -29,3 +40,11 @@ body {
 .user-text {
   margin-right: 10px;
 }
+
+/* .landing-page{
+  background-image: url('https://images.unsplash.com/photo-1607778413290-6bc9b4cf30f1?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100vh;
+} */

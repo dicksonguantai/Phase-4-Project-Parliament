@@ -7,7 +7,7 @@ function OngoingBills() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:5000/bills');
+        const response = await fetch('/bills');
         if (response.ok) {
           const data = await response.json();
           setBills(data.bills);
@@ -31,7 +31,7 @@ function OngoingBills() {
           <p>Affiliation: {bill.mp_affiliation}</p>
           <p>Description: {bill.description}</p>
           <p>Date: {bill.submission_date}</p>
-          <p>Status: {bill.outcome_status}</p>
+          <p>Status: {bill.outcomestatus}</p>
           <div>
             Upvotes: {bill.upvotes} | Downvotes: {bill.downvotes}
           </div>

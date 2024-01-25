@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 
 function BillDetails ()  {
-  const { id } = useParams();
-  const [billDetails, setBillDetails] = useState(null);
+  const { bill_id } = useParams();
+  const [billDetails, setBillDetails] = useState({});
 
   useEffect(() => {
-    fetch(`/bills/${id}`)
+    fetch(`/bills/${bill_id}`)
       .then((r) => {
         if (r.ok) {
           return r.json();
@@ -18,7 +18,7 @@ function BillDetails ()  {
       .catch((error) => {
         console.error(error);
       });
-  }, [id]);
+  }, [bill_id]);
 
 
   if (!billDetails) {
@@ -28,7 +28,7 @@ function BillDetails ()  {
   return (
     <div className="bill-details-container">
       <h2>{billDetails.title}</h2>
-      <p>{billDetails.description}</p>
+      <p>Description:{billDetails.description}</p>
       <p>Date: {billDetails.date}</p>
       <p>{billDetails.outcome_status}</p>
       <p>{billDetails.up_votes}</p>
