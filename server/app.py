@@ -216,9 +216,9 @@ class BillsByID(Resource):
             return {'message': 'Bill not found'}, 404
             
         data = request.get_json()
-        if 'upvote' in data:
+        if 'upvotes' in data:
             bill.upvotes += 1
-        elif 'downvote' in data:
+        elif 'downvotes' in data:
             bill.downvotes += 1
         else:
             return {'message': 'Invalid request'}, 400
@@ -247,17 +247,3 @@ if __name__ == '__main__':
 
 
 
-
-
-
-
-
-
-
-
-
-    # "first_name": "Mwanzia",
-    # "last_name": "Muli",
-    # "email": "samuelmuli@gmail.com",
-    # "password": "MuliSam",
-    # "role": "user"
