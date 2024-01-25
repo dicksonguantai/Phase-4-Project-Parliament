@@ -11,19 +11,47 @@ const LoginForm = () => {
   const [resetSuccessful, setResetSuccessful] = useState(false);
 
   const handleLogin = async () => {
-    // ... (existing code for login)
+    try {
+      // Replace with your actual login API endpoint
+      const response = await fetch('https://jsonplaceholder.typicode.com/posts/1', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-    // Clear email and password fields after handling login
-    setEmail(''); 
-    setPassword('');
+      const data = await response.json();
+      console.log('Login Response:', data);
+
+      // Clear email and password fields after handling login
+      setEmail('');
+      setPassword('');
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
   };
 
   const handleSignup = async () => {
-    // ... (existing code for signup)
+    try {
+      // Replace with your actual signup API endpoint
+      const response = await fetch('https://jsonplaceholder.typicode.com/posts/1', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-    // Clear email and password fields after handling signup
-    setEmail('');
-    setPassword('');
+      const data = await response.json();
+      console.log('Signup Response:', data);
+
+      // Clear email and password fields after handling signup
+      setEmail('');
+      setPassword('');
+    } catch (error) {
+      console.error('Error during signup:', error);
+    }
   };
 
   const handleForgotPassword = () => {
@@ -60,9 +88,43 @@ const LoginForm = () => {
     }
   };
 
+  const handleToggleSignup = () => {
+    if (resetPassword) {
+      setResetPassword(false);
+    } else {
+      setSignup(!signup);
+    }
+
+    // Clear email and password fields after toggling signup
+    setEmail('');
+    setPassword('');
+    setRetypePassword('');
+    setResetSuccessful(false);
+  };
+
   return (
     <div style={styles.container}>
       <h2>{signup ? 'Sign Up' : resetPassword ? (resetSuccessful ? 'Welcome Back' : 'Reset Password') : 'Welcome Back'}</h2>
+
+      {signup && (
+        <>
+          <div style={styles.inputContainer}>
+            <label>First Name:</label>
+            <input
+              type="text"
+              // Add state and onChange handler for first name
+            />
+          </div>
+          <div style={styles.inputContainer}>
+            <label>Last Name:</label>
+            <input
+              type="text"
+              // Add state and onChange handler for last name
+            />
+          </div>
+        </>
+      )}
+
       <div style={styles.inputContainer}>
         <label>Email:</label>
         <input
@@ -73,11 +135,34 @@ const LoginForm = () => {
         />
       </div>
 
+      <div style={styles.inputContainer}>
+        <label>Password:</label>
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          style={styles.input}
+        />
+      </div>
+
+      {signup && (
+        <div style={styles.checkboxContainer}>
+          <label>
+            <input
+              type="checkbox"
+              checked={rememberMe}
+              onChange={() => setRememberMe(!rememberMe)}
+            />
+            Remember me
+          </label>
+        </div>
+      )}
+
       {resetPassword ? (
         resetSuccessful ? (
           <>
             <p>Password successfully reset! Welcome back.</p>
-            <p style={styles.toggleSignup} onClick={() => setResetPassword(false)}>
+            <p style={styles.toggleSignup} onClick={handleToggleSignup}>
               Add existing user? Sign in
             </p>
           </>
@@ -104,48 +189,22 @@ const LoginForm = () => {
             <button type="button" onClick={handleResetPassword} style={styles.button}>
               Reset Password
             </button>
-            <p style={styles.toggleSignup} onClick={() => setResetPassword(false)}>
+            <p style={styles.toggleSignup} onClick={handleToggleSignup}>
               Existing user? Sign in
             </p>
           </>
         )
       ) : (
         <>
-          <div style={styles.inputContainer}>
-            <label>Password:</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              style={styles.input}
-            />
-          </div>
-          {signup && (
-            <div style={styles.checkboxContainer}>
-              <label>
-                <input
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={() => setRememberMe(!rememberMe)}
-                />
-                Remember me
-              </label>
-            </div>
-          )}
-          {signup ? (
-            <button type="button" onClick={handleSignup} style={styles.button}>
-              Sign Up
-            </button>
-          ) : (
-            <button type="button" onClick={handleLogin} style={styles.button}>
-              Login
-            </button>
-          )}
+          <button type="button" onClick={signup ? handleSignup : handleLogin} style={styles.button}>
+            {signup ? 'Sign Up' : 'Login'}
+          </button>
+
           <p onClick={handleForgotPassword} style={styles.forgotPassword}>
             Forgot Password?
           </p>
-          <p style={styles.toggleSignup} onClick={() => setSignup(!signup)}>
-            {signup ? 'Already have an account? Login' : "Don't have an account? Sign Up"}
+          <p style={styles.toggleSignup} onClick={handleToggleSignup}>
+            {resetPassword ? 'Existing user? Sign in' : signup ? 'Already have an account? Login' : "Don't have an account? Sign Up"}
           </p>
         </>
       )}
@@ -182,15 +241,17 @@ const styles = {
     borderRadius: '3px',
     cursor: 'pointer',
   },
-  forgotPassword: {
-    color: '#007BFF',
-    cursor: 'pointer',
-    marginBottom: '10px',
-  },
   toggleSignup: {
     color: '#007BFF',
     cursor: 'pointer',
   },
+  forgotPassword: {
+    color: '#FFC107',
+    cursor: 'pointer',
+    marginBottom: '20px',
+  },
 };
 
 export default LoginForm;
+
+
