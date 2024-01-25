@@ -1,6 +1,8 @@
-from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.ext.hybrid import hybrid_property
+from sqlalchemy_serializer import SerializerMixin
+from sqlalchemy.schema import CheckConstraint
 
-db = SQLAlchemy()
+from config import db, bcrypt
 
 class MP(db.Model):
     id = db.Column(db.Integer, primary_key=True)
