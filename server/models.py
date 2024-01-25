@@ -22,7 +22,7 @@ class Bill(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text)
-    submission_date = db.Column(db.Date, nullable=False)
+    submission_date = db.Column(db.DateTime,server_default=db.func.now(),nullable=False)
     outcome_status = db.Column(db.Boolean)
     upvotes = db.Column(db.Integer, default=0)
     downvotes = db.Column(db.Integer, default=0)
