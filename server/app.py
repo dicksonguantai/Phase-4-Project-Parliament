@@ -40,6 +40,32 @@ class Signup(Resource):
         except IntegrityError:
             db.session.rollback()
             return {'message': 'User already exists'}, 422
+        
+    def patch(self):
+        try:
+            email = request.json['email']
+            password = request.json['password']
+
+            if not email or not password:
+                return {'message': 'Invalid user data'}, 422
+
+            user = User.query.filter_by(email=email).first()
+
+            if not user:
+                return {'message': 'User not found'}, 404
+
+            user.password_hash = password
+            db.session.commit()
+
+            session['user_id'] = user.id
+
+            return {
+                'message': 'Password updated successfully'
+            }, 200
+        
+        except IntegrityError:
+            db.session.rollback()
+            return {'message': 'An error occurred'}, 422
 
 
 
