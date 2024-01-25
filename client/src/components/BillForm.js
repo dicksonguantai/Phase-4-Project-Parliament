@@ -1,23 +1,24 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react'
 
 const BillForm = () => {
   const [formData, setFormData] = useState({
     title: '',
-    mpName: '',
-    billText: '',
+    firstName: '',
+    lastName: '',
+    description: '', 
     affiliation: '',
-    constituency: '', // nimeadd field ya constituency
-  });
+    constituency: '',
+  })
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+  const handleChange = e => {
+    const {name, value} = e.target
+    setFormData({...formData, [name]: value})
+  }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Form Data:', formData);
-  };
+  const handleSubmit = e => {
+    e.preventDefault()
+    console.log('Form Data:', formData)
+  }
 
   return (
     <div>
@@ -33,22 +34,32 @@ const BillForm = () => {
           onChange={handleChange}
         />
         <br />
-        <label htmlFor="mpName">Mp Name:</label>
+        <label htmlFor="firstName">First Name:</label>
         <br />
         <input
           type="text"
-          id="mpName"
-          name="mpName"
-          value={formData.mpName}
+          id="firstName"
+          name="firstName"
+          value={formData.firstName}
           onChange={handleChange}
         />
         <br />
-        <label htmlFor="billText">Bill Text:</label>
+        <label htmlFor="lastName">Last Name:</label>
+        <br />
+        <input
+          type="text"
+          id="lastName"
+          name="lastName"
+          value={formData.lastName}
+          onChange={handleChange}
+        />
+        <br />
+        <label htmlFor="description">Description:</label>
         <br />
         <textarea
-          id="billText"
-          name="billText"
-          value={formData.billText}
+          id="description"
+          name="description"
+          value={formData.description}
           onChange={handleChange}
         ></textarea>
         <br />
@@ -75,8 +86,8 @@ const BillForm = () => {
         <input type="submit" value="Submit" />
       </form>
     </div>
-  );
-};
+  )
+}
 
-
-export default BillForm;
+export default BillForm
+//nimebakisha logic ya kuhandle data ya backend

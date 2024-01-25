@@ -5,6 +5,8 @@ const LoginForm = () => {
   const [password, setPassword] = useState('');
   const [retypePassword, setRetypePassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   const [signup, setSignup] = useState(false);
   const [resetPassword, setResetPassword] = useState(false);
@@ -40,15 +42,18 @@ const LoginForm = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ firstName, lastName, email, password, rememberMe }),
       });
 
       const data = await response.json();
       console.log('Signup Response:', data);
 
-      // Clear email and password fields after handling signup
+      // Clear form fields after handling signup
+      setFirstName('');
+      setLastName('');
       setEmail('');
       setPassword('');
+      setRememberMe(false);
     } catch (error) {
       console.error('Error during signup:', error);
     }
@@ -59,7 +64,6 @@ const LoginForm = () => {
 
     // Clear email and password fields after showing reset password section
     setEmail('');
-    setPassword('');
     setRetypePassword('');
     setResetSuccessful(false);
   };
@@ -80,7 +84,6 @@ const LoginForm = () => {
 
       // Clear email and password fields after handling password reset
       setEmail('');
-      setPassword('');
       setRetypePassword('');
       setResetSuccessful(true);
     } catch (error) {
@@ -95,10 +98,12 @@ const LoginForm = () => {
       setSignup(!signup);
     }
 
-    // Clear email and password fields after toggling signup
+    // Clear form fields after toggling signup
+    setFirstName('');
+    setLastName('');
     setEmail('');
     setPassword('');
-    setRetypePassword('');
+    setRememberMe(false);
     setResetSuccessful(false);
   };
 
@@ -112,99 +117,136 @@ const LoginForm = () => {
             <label>First Name:</label>
             <input
               type="text"
-              // Add state and onChange handler for first name
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              style={styles.input}
             />
           </div>
           <div style={styles.inputContainer}>
             <label>Last Name:</label>
             <input
               type="text"
-              // Add state and onChange handler for last name
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              style={styles.input}
             />
           </div>
+
+          <div style={styles.inputContainer}>
+            <label>Email:</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={styles.input}
+            />
+          </div>
+
+          <div style={styles.inputContainer}>
+            <label>Password:</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={styles.input}
+            />
+          </div>
+
+          <div style={styles.checkboxContainer}>
+            <label>
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={() => setRememberMe(!rememberMe)}
+              />
+              Remember me
+            </label>
+          </div>
+
+          <button type="button" onClick={handleSignup} style={styles.button}>
+            Sign Up
+          </button>
+
+          <p style={styles.toggleSignup} onClick={handleToggleSignup}>
+            Existing user? Sign In
+          </p>
         </>
       )}
 
-      <div style={styles.inputContainer}>
-        <label>Email:</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={styles.input}
-        />
-      </div>
-
-      <div style={styles.inputContainer}>
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={styles.input}
-        />
-      </div>
-
-      {signup && (
-        <div style={styles.checkboxContainer}>
-          <label>
+      {resetPassword && (
+        <>
+          <div style={styles.inputContainer}>
+            <label>Email:</label>
             <input
-              type="checkbox"
-              checked={rememberMe}
-              onChange={() => setRememberMe(!rememberMe)}
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={styles.input}
             />
-            Remember me
-          </label>
-        </div>
+          </div>
+
+          <div style={styles.inputContainer}>
+            <label>New Password:</label>
+            <input
+              type="password"
+              value={retypePassword}
+              onChange={(e) => setRetypePassword(e.target.value)}
+              style={styles.input}
+            />
+          </div>
+
+          <div style={styles.inputContainer}>
+            <label>Retype New Password:</label>
+            <input
+              type="password"
+              value={retypePassword}
+              onChange={(e) => setRetypePassword(e.target.value)}
+              style={styles.input}
+            />
+          </div>
+
+          <button type="button" onClick={handleResetPassword} style={styles.button}>
+            Reset Password
+          </button>
+
+          <p style={styles.toggleSignup} onClick={handleToggleSignup}>
+            Existing user? Sign In
+          </p>
+        </>
       )}
 
-      {resetPassword ? (
-        resetSuccessful ? (
-          <>
-            <p>Password successfully reset! Welcome back.</p>
-            <p style={styles.toggleSignup} onClick={handleToggleSignup}>
-              Add existing user? Sign in
-            </p>
-          </>
-        ) : (
-          <>
-            <div style={styles.inputContainer}>
-              <label>New Password:</label>
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                style={styles.input}
-              />
-            </div>
-            <div style={styles.inputContainer}>
-              <label>Retype New Password:</label>
-              <input
-                type="password"
-                value={retypePassword}
-                onChange={(e) => setRetypePassword(e.target.value)}
-                style={styles.input}
-              />
-            </div>
-            <button type="button" onClick={handleResetPassword} style={styles.button}>
-              Reset Password
-            </button>
-            <p style={styles.toggleSignup} onClick={handleToggleSignup}>
-              Existing user? Sign in
-            </p>
-          </>
-        )
-      ) : (
+      {!signup && !resetPassword && (
         <>
-          <button type="button" onClick={signup ? handleSignup : handleLogin} style={styles.button}>
-            {signup ? 'Sign Up' : 'Login'}
+          <div style={styles.inputContainer}>
+            <label>Email:</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              style={styles.input}
+            />
+          </div>
+
+          <div style={styles.inputContainer}>
+            <label>Password:</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              style={styles.input}
+            />
+          </div>
+
+          <button type="button" onClick={handleLogin} style={styles.button}>
+            Login
           </button>
 
           <p onClick={handleForgotPassword} style={styles.forgotPassword}>
             Forgot Password?
           </p>
+
           <p style={styles.toggleSignup} onClick={handleToggleSignup}>
-            {resetPassword ? 'Existing user? Sign in' : signup ? 'Already have an account? Login' : "Don't have an account? Sign Up"}
+            Don't have an account? Sign Up
           </p>
         </>
       )}
@@ -253,5 +295,6 @@ const styles = {
 };
 
 export default LoginForm;
+
 
 
