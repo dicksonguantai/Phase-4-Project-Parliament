@@ -11,26 +11,31 @@ def seed_database():
         db.create_all()
 
         # Seed MPs
+        mps = []
         for _ in range(20):
             mp = MP(name=fake.name(), affiliation=fake.word(), constituency=fake.word())
+            mps.append(mp)
             db.session.add(mp)
-
         db.session.commit()
 
-        # Seed Users (Including MPs)
+        # Seed Users
+        users = []
         for _ in range(30):
             if fake.boolean():  # Randomly assign role (user or mp)
-                user = User(name=fake.name(), role='user', password=fake.password(), email=fake.email())
+                role = 'mp'
+                # Select a random MP's name for the user
+                mp_name = fake.random_element(elements=[mp.name for mp in mps])
+                user = User(name=mp_name, role=role, password=fake.password(), email=fake.email())
             else:
-                user = MP(name=fake.name(), affiliation=fake.word(), constituency=fake.word())
-
+                role = 'user'
+                user = User(name=fake.name(), role=role, password=fake.password(), email=fake.email())
+            users.append(user)
             db.session.add(user)
-
         db.session.commit()
 
         # Seed Bills
         for _ in range(30):
-            mp_id = fake.random_element(elements=[mp.id for mp in MP.query.all()])
+            mp_id = fake.random_element(elements=[mp.id for mp in mps])
             bill = Bill(
                 title=fake.sentence(),
                 description=fake.paragraph(),
@@ -41,7 +46,6 @@ def seed_database():
                 mp_id=mp_id
             )
             db.session.add(bill)
-
         db.session.commit()
 
         # Seed Voting Records
@@ -52,7 +56,6 @@ def seed_database():
                 vote_status=fake.boolean()
             )
             db.session.add(voting_record)
-
         db.session.commit()
 
 if __name__ == '__main__':

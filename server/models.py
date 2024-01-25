@@ -26,7 +26,7 @@ class Bill(db.Model, SerializerMixin):
     outcome_status = db.Column(db.Boolean)
     upvotes = db.Column(db.Integer, default=0)
     downvotes = db.Column(db.Integer, default=0)
-    mp_id = db.Column(db.Integer, db.ForeignKey('mp.id'))
+    mp_id = db.Column(db.Integer, db.ForeignKey('mps.id'))
     mp = db.relationship('MP', back_populates='bills')
     voting_records = db.relationship('VotingRecord', back_populates='bill')
 
@@ -61,7 +61,7 @@ class VotingRecord(db.Model, SerializerMixin):
     __tablename__ = 'voting_records'
 
     id = db.Column(db.Integer, primary_key=True)
-    bill_id = db.Column(db.Integer, db.ForeignKey('bill.id'))
+    bill_id = db.Column(db.Integer, db.ForeignKey('bills.id'))
     vote_status = db.Column(db.Boolean)
     bill = db.relationship('Bill', back_populates='voting_records')
 
