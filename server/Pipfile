@@ -16,7 +16,6 @@ importlib-resources = "*"
 pytest = "*"
 flask-bcrypt = "*"
 sqlalchemy = "*"
-gunicorn = "*"
 
 [dev-packages]
 
