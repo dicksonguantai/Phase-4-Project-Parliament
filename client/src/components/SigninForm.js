@@ -1,10 +1,11 @@
+// LoginForm.js
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
   const navigate = useNavigate();
 
   const handleLogin = async () => {
@@ -22,7 +23,6 @@ const LoginForm = () => {
 
       if (response.status === 201) {
         localStorage.setItem('token', data.access_token);
-
         navigate('/billdetails');
       }
     } catch (error) {
@@ -31,10 +31,10 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
+    <div className="signup-box"> {/* Use the same styling as SignupForm */}
       <h2>Login</h2>
 
-      <div>
+      <div className="form-group">
         <label>Email:</label>
         <input
           type="email"
@@ -43,7 +43,7 @@ const LoginForm = () => {
         />
       </div>
 
-      <div>
+      <div className="form-group">
         <label>Password:</label>
         <input
           type="password"
@@ -52,15 +52,18 @@ const LoginForm = () => {
         />
       </div>
 
-      <button type="button" onClick={handleLogin}>
-        Login
-      </button>
+      <div className="form-group">
+        <button type="button" onClick={handleLogin}>
+          Login
+        </button>
+      </div>
+
       <p>
         Don't have an account? <Link to="/signup">Sign Up</Link>
       </p>
-
     </div>
   );
 };
 
 export default LoginForm;
+

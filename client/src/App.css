@@ -1,9 +1,17 @@
-header {
-  text-align: left;
-  padding: 10px;
+
+body,
+h1,
+h2,
+p,
+label,
+button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
+  font-family: 'Arial', sans-serif;
   background-image: url('https://images.unsplash.com/photo-1554034483-04fda0d3507b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
   background-size: cover;
   background-repeat: no-repeat;
@@ -15,31 +23,261 @@ body {
   justify-content: center;
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
-.signIn-Button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.content-text {
+/* Header styling */
+header {
   text-align: center;
-  margin-top: 50px;
+  padding: 20px;
+  color: #333;
 }
 
-.signup-button {
+/* Landing page container styling */
+.landing-page {
+  max-width: 800px;
+  width: 100%;
+  margin: 20px;
+  padding: 40px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   text-align: center;
-  margin-top: 50px;
 }
 
+/* Form container styling */
+.form-container {
+  max-width: 400px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  margin: 20px;
+}
+
+/* Form group styling */
+.form-group {
+  margin-bottom: 20px;
+}
+
+/* Input styling */
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  border: 2px solid #3498db;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Button styling */
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Link styling */
+a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* User text styling */
 .user-text {
+  color: white;
   margin-right: 10px;
 }
+
+/* Content text styling */
+.content-text h2,
+.user-text {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Container styling */
+.signup-box,
+.login-box {
+  width: 300px;
+  height: auto;
+  margin: auto;
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Input styling for the signup/login page */
+.signup-box input,
+.signup-box select,
+.login-box input,
+.login-box select {
+  width: 100%;
+  padding: 8px; 
+  margin-bottom: 8px; 
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Button styling for the signup/login page */
+.signup-box button,
+.login-box button {
+  width: 100%;
+  padding: 10px; 
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Hover effect for the signup/login button */
+.signup-box button:hover,
+.login-box button:hover {
+  background-color: #45a049;
+}
+/* Ongoing Bills styling */
+.ongoing-bills {
+  display: block;
+  text-decoration: none;
+  color: #333;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin: 10px 0;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.ongoing-bills:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.ongoing-bills h2 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.ongoing-bills p {
+  margin-bottom: 5px;
+}
+
+.ongoing-bills div {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Page heading */
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+/* Container styling */
+.container {
+  max-width: 800px;
+  margin: 20px auto; 
+  padding: 20px;
+}
+
+/* General styles */
+body {
+  font-family: 'Arial', sans-serif;
+  background-image: url('https://images.unsplash.com/photo-1554034483-04fda0d3507b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; 
+  background-attachment: fixed; 
+}
+
+
+
+/* BillForm styling */
+.form-container {
+  max-width: 600px; 
+  width: 120%;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  margin: 20px auto; 
+}
+
+.form-group {
+  margin-bottom: 1px;
+  margin-top: 1px; 
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px; 
+  margin-top: 1px; 
+  margin-bottom: 10px;
+  border: 2px solid #3498db;
+  border-radius: 5px;
+  font-size: 14px; 
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+.user-sections {
+  display: flex;
+  justify-content: flex-end; 
+}
+
+/* Sign In button styling */
+.signIn-Button {
+  margin-right: 20px; 
+}
+
+/* Add this CSS to move the existing user sign in to the top right corner */
+.user-sections {
+  position: absolute;
+  top: 20px; 
+  right: 20px; 
+}
+
+
 
 /* .landing-page{
   background-image: url('https://images.unsplash.com/photo-1607778413290-6bc9b4cf30f1?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
