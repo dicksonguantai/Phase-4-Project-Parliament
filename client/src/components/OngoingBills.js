@@ -28,9 +28,8 @@ function OngoingBills() {
       {bills.map((bill) => (
         <Link to={`/bills/${bill.id}`} key={bill.id} className="ongoing-bills">
           <h2>{bill.title}</h2>
+          <p>Name: {bill.mp_first_name} {bill.mp_last_name}</p>
           <p>Affiliation: {bill.mp_affiliation}</p>
-          <p>Description: {bill.description}</p>
-          <p>Date: {bill.submission_date}</p>
           <p>Status: {bill.outcomestatus}</p>
           <div>
             Upvotes: {bill.upvotes} | Downvotes: {bill.downvotes}
