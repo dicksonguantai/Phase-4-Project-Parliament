@@ -9,11 +9,17 @@ function BillDetails ()  {
   useEffect(() => {
 
     fetch('/check_session')
-    .then((response) => response.json())
-    .then((data) => {
-      setUserRole(data.role);
-    })
-    .catch((error) => console.error(error));
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Error fetching user role');
+        }
+      })
+      .then((data) => {
+        setUserRole(data.role || 'user');
+      })
+      .catch((error) => console.error(error));
 
 
     fetch(`/bills/${bill_id}`)
@@ -29,6 +35,29 @@ function BillDetails ()  {
         console.error(error);
       });
   }, [bill_id]);
+
+  const handleVote = async (voteType) => {
+    try {
+      const response = await fetch(`/bills/${bill_id}/vote/${voteType}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const data = await response.json();
+      console.log('Vote Response:', data);
+
+      setBillDetails((prevDetails) => ({
+        ...prevDetails,
+        upvotes: data.upvotes,
+        downvotes: data.downvotes,
+        outcome_status: data.outcome_status,
+      }));
+    } catch (error) {
+      console.error('Error during voting:', error);
+    }
+  };
 
 
   if (!billDetails) {

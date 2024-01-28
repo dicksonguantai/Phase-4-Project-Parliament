@@ -9,7 +9,6 @@ const BillForm = () => {
     affiliation: '',
     constituency: '',
   });
-//ku POST data kutoka kwa form ni apa sasa
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -54,69 +53,83 @@ const BillForm = () => {
   };
 
   return (
-    <div>
+    <div className="form-container">
       <h2>Bill Proposal Form</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Title:</label>
-        <br />
-        <input
-          type="text"
-          id="title"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-        />
-        <br />
-        <label htmlFor="firstName">First Name:</label>
-        <br />
-        <input
-          type="text"
-          id="firstName"
-          name="firstName"
-          value={formData.firstName}
-          onChange={handleChange}
-        />
-        <br />
-        <label htmlFor="lastName">Last Name:</label>
-        <br />
-        <input
-          type="text"
-          id="lastName"
-          name="lastName"
-          value={formData.lastName}
-          onChange={handleChange}
-        />
-        <br />
-        <label htmlFor="description">Description:</label>
-        <br />
-        <textarea
-          id="description"
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-        ></textarea>
-        <br />
-        <label htmlFor="affiliation">MP Affiliation:</label>
-        <br />
-        <input
-          type="text"
-          id="affiliation"
-          name="affiliation"
-          value={formData.affiliation}
-          onChange={handleChange}
-        />
-        <br />
-        <label htmlFor="constituency">MP Constituency:</label>
-        <br />
-        <input
-          type="text"
-          id="constituency"
-          name="constituency"
-          value={formData.constituency}
-          onChange={handleChange}
-        />
-        <br />
-        <input type="submit" value="Submit" />
+        <div className="form-group">
+          <label htmlFor="title">Title:</label>
+          <br />
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="firstName">First Name:</label>
+          <br />
+          <input
+            type="text"
+            id="firstName"
+            name="firstName"
+            value={formData.firstName}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="lastName">Last Name:</label>
+          <br />
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            value={formData.lastName}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="description">Description:</label>
+          <br />
+          <textarea
+            id="description"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+          ></textarea>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="affiliation">MP Affiliation:</label>
+          <br />
+          <input
+            type="text"
+            id="affiliation"
+            name="affiliation"
+            value={formData.affiliation}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="constituency">MP Constituency:</label>
+          <br />
+          <input
+            type="text"
+            id="constituency"
+            name="constituency"
+            value={formData.constituency}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group">
+          <button type="submit">Submit</button>
+        </div>
       </form>
     </div>
   );
