@@ -40,6 +40,7 @@ function BillDetails ()  {
 
   const handleVote = async (voteType) => {
     if (hasVoted) {
+      alert('You have already voted.');
       console.log('User has already voted');
       return;
     }
@@ -66,6 +67,8 @@ function BillDetails ()  {
       }));
 
       setHasVoted(true);
+
+      alert('Your vote has been recorded.');
     } else {
       console.error('Error during voting:', response.statusText);
     }
