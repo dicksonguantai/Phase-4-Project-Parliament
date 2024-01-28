@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function OngoingBills() {
   const [bills, setBills] = useState([]);
-//hii ndo function ya ku GET data from backend.
+//hii ndo function ya ku FETCH data from backend.
   useEffect(() => {
     const fetchData = async () => {
       try {
