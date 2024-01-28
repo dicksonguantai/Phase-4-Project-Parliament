@@ -26,11 +26,11 @@ function OngoingBills() {
     <div>
       <h1>Ongoing Bills</h1>
       {bills.map((bill) => (
-        <Link to={`/bills/${bill.id}`} key={bill.id} className="ongoing-bills">
+        <Link to={`/bills/${bill.id}`} key={bill.title} className="ongoing-bills">
           <h2>{bill.title}</h2>
-          <p>Name: {bill.mp_first_name} {bill.mp_last_name}</p>
+          <p>Sponsor: {bill.mp_first_name} {bill.mp_last_name}</p>
           <p>Affiliation: {bill.mp_affiliation}</p>
-          <p>Status: {bill.outcomestatus}</p>
+          <p>Status: {bill.outcome_status}</p>
           <div>
             Upvotes: {bill.upvotes} | Downvotes: {bill.downvotes}
           </div>
