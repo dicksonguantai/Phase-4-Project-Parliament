@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
 const SignupForm = () => {
   const navigate = useNavigate();
   const [firstName, setFirstName] = useState('');
@@ -25,25 +24,8 @@ const SignupForm = () => {
       console.log('Signup Response:', data);
 
       if (response.status === 201) {
-        const loginResponse = await fetch('/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ email, password }),
-        });
-
-        const loginData = await loginResponse.json();
-        console.log('Login Response:', loginData);
-
-        localStorage.setItem('token', loginData.access_token);
-
-        // Redirect based on user role
-        if (role === 'mp') {
-          navigate('/billform'); // Redirect to billform if the user is an MP
-        } else {
-          navigate('/ongoingbills'); // Redirect to ongoingbills if the user is a regular user
-        }
+        // Redirect to login page after successful signup
+        navigate('/login');
       }
 
       // Reset input fields after successful signup
@@ -116,5 +98,6 @@ const SignupForm = () => {
 };
 
 export default SignupForm;
+
 
 
