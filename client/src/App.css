@@ -1,3 +1,4 @@
+
 body,
 h1,
 h2,
@@ -16,22 +17,29 @@ body {
   background-repeat: no-repeat;
   background-position: center center;
   height: 100vh;
-  margin: 0;
+  margin: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+
+
 /* Navbar.js styling */
 nav {
+  position: fixed; /* Fix the navbar at the top of the screen */
+  top: 0;
+  left: 0;
+  width: 100%; /* Make the navbar full-width */
   background-color: #5b585872;
   padding: 10px 20px;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.52);
+  z-index: 1000; /* Ensure the navbar appears above other elements */
 }
 
 ul {
-  list-style: circle;
+  list-style: none; /* Remove the default list style */
   margin: 0;
   padding: 0;
   display: flex;
@@ -46,7 +54,7 @@ a {
   text-decoration: none;
   color: white;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 18px;
   text-align: center;
   transition: color 0.3s ease-in-out;
 }
@@ -55,16 +63,18 @@ a:hover {
   color: #f0dd6f;
 }
 
-/* Home.js styling */
+
+/*Home.js styling*/
 
 /* Header styling */
 header {
-  text-align: center;
+  text-align: center; 
   padding: 20px;
   color: #333;
 }
 
 /* Landing page container styling */
+
 .landing-page {
   max-width: 800px;
   width: 100%;
@@ -76,25 +86,26 @@ header {
   text-align: center;
 }
 
+
 button:hover {
   background-color: #071508;
 }
 
 .user-sections {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-end; 
 }
 
 /* Sign In button styling */
 .signIn-Button {
-  margin-right: 20px;
+  margin-right: 20px; 
 }
 
-/* Add this CSS to move the existing user sign-in to the top right corner */
+/* Add this CSS to move the existing user sign in to the top right corner */
 .user-sections {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 20px; 
+  right: 20px; 
 }
 
 /* Form container styling */
@@ -166,46 +177,39 @@ a:hover {
   margin-bottom: 20px;
 }
 
-
 /* Container styling */
 .signup-box,
-.login-box,
-.ongoing-bills {
+.login-box {
   width: 300px;
   height: auto;
   margin: auto;
-  background-color: rgba(255, 255, 255, 0.53); /* Change to white background */
+  background-color: rgba(255, 255, 255, 0.293);
   border-radius: 5px;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
   margin-top: 10px;
   margin-right: auto;
-  display: block; /* Ensure each section is displayed as a block */
 }
 
 /* Input styling for the signup/login page */
 .signup-box input,
 .signup-box select,
 .login-box input,
-.login-box select,
-.ongoing-bills h2,
-.ongoing-bills p,
-.ongoing-bills div {
+.login-box select {
   width: 100%;
   margin-left: -6.5px;
-  padding: 8px;
-  margin-bottom: 8px;
+  padding: 8px; 
+  margin-bottom: 8px; 
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
 }
 
-/* Button styling for the signup/login/ongoing-bills page */
+/* Button styling for the signup/login page */
 .signup-box button,
-.login-box button,
-.ongoing-bills button {
+.login-box button {
   width: 100%;
-  padding: 10px;
+  padding: 10px; 
   background-color: #32ee38;
   color: white;
   font-size: 16px;
@@ -218,20 +222,35 @@ a:hover {
   transition: background-color 0.3s ease-in-out;
 }
 
-/* Hover effect for the signup/login/ongoing-bills button */
+/* Hover effect for the signup/login button */
 .signup-box button:hover,
-.login-box button:hover,
-.ongoing-bills button:hover {
+.login-box button:hover {
   background-color: #080d08;
 }
 
+
 /* Ongoing Bills styling */
-.ongoing-bills h1 {
+
+.ongoing-bills-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 10px;
+  zoom: 0.67;
+}
+.ongoing-bills h1{
   margin-top: 100%;
+}
+.ongoing-bills {
+  background-color: #f2f2f286;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: #333;
 }
 
 .ongoing-bills h2 {
-  font-size: 18px;
+  font-size: 20px;
   margin-bottom: 10px;
 }
 
@@ -242,9 +261,10 @@ a:hover {
 
 .ongoing-bills div {
   margin-top: 10px;
-  font-size: 14px;
-  color: #777;
+  font-size: 18px;
+  color: #000000;
 }
+
 
 /* General styles */
 body {
@@ -256,36 +276,37 @@ body {
   height: 100vh;
   margin: 0;
   padding: 0;
-  overflow: auto;
-  background-attachment: fixed;
+  overflow: auto; 
+  background-attachment: fixed; 
 }
+
 
 /* BillForm styling */
 .form-container {
-  max-width: 600px;
+  max-width: 600px; 
   width: 120%;
   background-color: rgba(255, 253, 253, 0.254);
   padding: 50px;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  margin: 20px auto;
+  margin: 20px auto; 
 }
 
 .form-group {
   margin-bottom: 1px;
-  margin-top: 1px;
+  margin-top: 1px; 
 }
 
 input,
 textarea {
   width: 100%;
-  padding: 10px;
+  padding: 10px; 
   margin-left: -8.5px;
-  margin-top: 1px;
+  margin-top: 1px; 
   margin-bottom: 10px;
   border: 2px solid #3498db;
   border-radius: 5px;
-  font-size: 14px;
+  font-size: 14px; 
 }
 
 button {
@@ -301,6 +322,7 @@ button {
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
+
 
 /* BillDetails.css*/
 .bill-details-container {
@@ -341,6 +363,7 @@ button {
   font-weight: bold;
   color: #333;
 }
+
 
 
 

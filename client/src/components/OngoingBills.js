@@ -4,9 +4,8 @@ import NavBar from '../components/NavBar';
 
 function OngoingBills() {
   const [bills, setBills] = useState([]);
-//hii ndo function ya ku GET data from backend.
-  useEffect(() => {
 
+  useEffect(() => {
     fetch('/check_session')
       .then((response) => {
         if (response.ok) {
@@ -14,7 +13,8 @@ function OngoingBills() {
         } else {
           console.log('Error fetching user role');
         }
-      })
+      });
+
     const fetchData = async () => {
       try {
         const response = await fetch('/bills');
@@ -33,20 +33,22 @@ function OngoingBills() {
   }, []); 
 
   return (
-    <div className="ongoing-bills-container">
+    <div>
       <NavBar />
       <h1>Ongoing Bills</h1>
-      {bills.map((bill) => (
-        <Link to={`/bills/${bill.id}`} key={bill.id} className="ongoing-bills">
-          <h2>{bill.title}</h2>
-          <p>By: {bill.mp_first_name} {bill.mp_last_name}</p>
-          <p>Affiliation: {bill.mp_affiliation}</p>
-          <p>Status: {bill.outcomestatus ? 'passed' : 'failed'}</p>
-          <div>
-            Upvotes: {bill.upvotes} | Downvotes: {bill.downvotes}
-          </div>
-        </Link>
-      ))}
+      <div className="ongoing-bills-container">
+        {bills.map((bill) => (
+          <Link to={`/bills/${bill.id}`} key={bill.id} className="ongoing-bills">
+            <h2>{bill.title}</h2>
+            <p>By: {bill.mp_first_name} {bill.mp_last_name}</p>
+            <p>Affiliation: {bill.mp_affiliation}</p>
+            <p>Status: {bill.outcomestatus ? 'passed' : 'failed'}</p>
+            <div>
+              Upvotes: {bill.upvotes} | Downvotes: {bill.downvotes}
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }
