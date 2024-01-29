@@ -132,6 +132,7 @@ class Bills(Resource):
 
             return {
                 'bills': [{
+                    'id': bill.id,
                     'title': bill.title,
                     'upvotes': bill.upvotes,
                     'downvotes': bill.downvotes,
@@ -192,6 +193,7 @@ class BillsByID(Resource):
 
             if bill:
                 return {
+                    'id': bill.id,
                     'title': bill.title,
                     'description': bill.description,
                     'submission_date': bill.submission_date.isoformat(),

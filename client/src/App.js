@@ -20,7 +20,7 @@ function App() {
         <Route path="/signup" element={<SignupForm/>}/>
         <Route path="/bill-proposal-form" element={<BillForm/>}/>
         <Route path="/ongoing-bills" element={<OngoingBills/>}/>
-        <Route path="/bills/:bill_Id" element={<BillDetails/>}/>
+        <Route path="/bills/:id" element={<BillDetails/>}/>
       </Routes>
     </Router>
   );

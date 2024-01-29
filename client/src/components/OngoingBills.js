@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function OngoingBills() {
   const [bills, setBills] = useState([]);
-//hii ndo function ya ku FETCH data from backend.
+//hii ndo function ya ku GET data from backend.
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -26,11 +26,12 @@ function OngoingBills() {
     <div>
       <h1>Ongoing Bills</h1>
       {bills.map((bill) => (
-        <Link to={`/bills/${bill.id}`} key={bill.title} className="ongoing-bills">
+        <Link to={`/bills/${bill.id}`} key={bill.id} className="ongoing-bills">
           <h2>{bill.title}</h2>
-          <p>Sponsor: {bill.mp_first_name} {bill.mp_last_name}</p>
           <p>Affiliation: {bill.mp_affiliation}</p>
-          <p>Status: {bill.outcome_status}</p>
+          <p>Description: {bill.description}</p>
+          <p>Date: {bill.submission_date}</p>
+          <p>Status: {bill.outcomestatus}</p>
           <div>
             Upvotes: {bill.upvotes} | Downvotes: {bill.downvotes}
           </div>
