@@ -96,8 +96,8 @@ function BillDetails ()  {
         <p>Description:{bill.description}</p>
         <p>Date: {formatDate(bill.submission_date)}</p>
         <p>{bill.outcome_status}</p>
-        <p>{bill.upvotes}</p>
-        <p>{bill.downvotes}</p>
+        <p>Upvotes: {bill.upvotes}</p>
+        <p>Downvotes: {bill.downvotes}</p>
         {userRole === 'mp' && (
           <div>
           <button type="button" onClick={() => handleVote('upvote')} disabled={hasVoted}>
