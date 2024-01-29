@@ -7,6 +7,11 @@ function BillDetails ()  {
   const [userRole, setUserRole] = useState('user');
   const [hasVoted, setHasVoted] = useState(false);
 
+  function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  }
+
   useEffect(() => {
 
     fetch('/check_session')
@@ -86,7 +91,7 @@ function BillDetails ()  {
     <div className="bill-details-container">
       <h2>{bill.title}</h2>
       <p>Description:{bill.description}</p>
-      <p>Date: {bill.submission_date}</p>
+      <p>Date: {formatDate(bill.submission_date)}</p>
       <p>{bill.outcome_status}</p>
       <p>{bill.upvotes}</p>
       <p>{bill.downvotes}</p>

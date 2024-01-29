@@ -5,6 +5,15 @@ function OngoingBills() {
   const [bills, setBills] = useState([]);
 //hii ndo function ya ku GET data from backend.
   useEffect(() => {
+
+    fetch('/check_session')
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          throw new Error('Error fetching user role');
+        }
+      })
     const fetchData = async () => {
       try {
         const response = await fetch('/bills');
@@ -28,10 +37,9 @@ function OngoingBills() {
       {bills.map((bill) => (
         <Link to={`/bills/${bill.id}`} key={bill.id} className="ongoing-bills">
           <h2>{bill.title}</h2>
+          <p>By: {bill.mp_first_name} {bill.mp_last_name}</p>
           <p>Affiliation: {bill.mp_affiliation}</p>
-          <p>Description: {bill.description}</p>
-          <p>Date: {bill.submission_date}</p>
-          <p>Status: {bill.outcomestatus}</p>
+          <p>Status: {bill.outcomestatus ? 'passed' : 'failed'}</p>
           <div>
             Upvotes: {bill.upvotes} | Downvotes: {bill.downvotes}
           </div>
