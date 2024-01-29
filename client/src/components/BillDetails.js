@@ -92,12 +92,12 @@ function BillDetails ()  {
     <div>
       <NavBar />
       <div className="bill-details-container">
-        <h2>{bill.title}</h2>
-        <p>Description:{bill.description}</p>
-        <p>Date: {formatDate(bill.submission_date)}</p>
+        <h2><strong><em>{bill.title}</em></strong></h2>
+        <p><em>Description:</em> {bill.description}</p>
+        <p><em>Date:</em> {formatDate(bill.submission_date)}</p>
         <p>{bill.outcome_status}</p>
-        <p>Upvotes: {bill.upvotes}</p>
-        <p>Downvotes: {bill.downvotes}</p>
+        <p><em>Upvotes:</em> {bill.upvotes}</p>
+        <p><em>Downvotes:</em> {bill.downvotes}</p>
         {userRole === 'mp' && (
           <div>
           <button type="button" onClick={() => handleVote('upvote')} disabled={hasVoted}>
