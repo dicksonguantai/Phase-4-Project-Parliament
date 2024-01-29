@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
+import NavBar from './NavBar';
 
 function BillDetails ()  {
   const { id } = useParams();
   const [bill, setBill] = useState({});
   const [userRole, setUserRole] = useState('user');
   const [hasVoted, setHasVoted] = useState(false);
+
+  function formatDate(dateString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  }
 
   useEffect(() => {
 
@@ -83,26 +89,29 @@ function BillDetails ()  {
   }
 
   return (
-    <div className="bill-details-container">
-      <h2>{bill.title}</h2>
-      <p>Description:{bill.description}</p>
-      <p>Date: {bill.submission_date}</p>
-      <p>{bill.outcome_status}</p>
-      <p>{bill.upvotes}</p>
-      <p>{bill.downvotes}</p>
-      {userRole === 'mp' && (
-        <div>
-        <button type="button" onClick={() => handleVote('upvote')} disabled={hasVoted}>
-          Upvote
-        </button>
-        <button type="button" onClick={() => handleVote('downvote')} disabled={hasVoted}>
-          Downvote
-        </button>
+    <div>
+      <NavBar />
+      <div className="bill-details-container">
+        <h2>{bill.title}</h2>
+        <p>Description:{bill.description}</p>
+        <p>Date: {formatDate(bill.submission_date)}</p>
+        <p>{bill.outcome_status}</p>
+        <p>{bill.upvotes}</p>
+        <p>{bill.downvotes}</p>
+        {userRole === 'mp' && (
+          <div>
+          <button type="button" onClick={() => handleVote('upvote')} disabled={hasVoted}>
+            Upvote
+          </button>
+          <button type="button" onClick={() => handleVote('downvote')} disabled={hasVoted}>
+            Downvote
+          </button>
+        </div>
+        )}
+
+        {userRole !== 'mp' && <p>You can only view the details.</p>}
+
       </div>
-      )}
-
-      {userRole !== 'mp' && <p>You can only view the details.</p>}
-
     </div>
   );
 };

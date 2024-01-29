@@ -22,7 +22,7 @@ const LoginForm = () => {
 
       if (response.status === 201) {
         localStorage.setItem('token', data.access_token);
-        navigate('/billdetails');
+        navigate('/ongoing-bills');
       }
     } catch (error) {
       console.error('Error during login:', error);
