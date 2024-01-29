@@ -1,18 +1,17 @@
-
 body,
 h1,
 h2,
 p,
 label,
 button {
-  margin: 0;
+  margin: 0px;
   padding: 0;
   box-sizing: border-box;
 }
 
 body {
   font-family: 'Arial', sans-serif;
-  background-image: url('https://images.unsplash.com/photo-1554034483-04fda0d3507b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-image: url('./assets/Free\ Gradient\ Backgrounds\ \(Community\)_page-0001.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -22,6 +21,41 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+/* Navbar.js styling */
+nav {
+  background-color: #5b585872;
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.52);
+}
+
+ul {
+  list-style: circle;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+li {
+  margin-right: 28px;
+}
+
+/* Navbar links styling */
+a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+  color: #f0dd6f;
+}
+
+/* Home.js styling */
 
 /* Header styling */
 header {
@@ -36,17 +70,38 @@ header {
   width: 100%;
   margin: 20px;
   padding: 40px;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.53);
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.704);
   text-align: center;
+}
+
+button:hover {
+  background-color: #071508;
+}
+
+.user-sections {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Sign In button styling */
+.signIn-Button {
+  margin-right: 20px;
+}
+
+/* Add this CSS to move the existing user sign-in to the top right corner */
+.user-sections {
+  position: absolute;
+  top: 20px;
+  right: 20px;
 }
 
 /* Form container styling */
 .form-container {
   max-width: 400px;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.479);
   padding: 40px;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
@@ -55,7 +110,7 @@ header {
 
 /* Form group styling */
 .form-group {
-  margin-bottom: 20px;
+  margin-bottom: 200px;
 }
 
 /* Input styling */
@@ -113,138 +168,128 @@ a:hover {
 
 /* Container styling */
 .signup-box,
-.login-box {
+.login-box,
+.ongoing-bills {
   width: 300px;
   height: auto;
   margin: auto;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.53); /* Change to white background */
   border-radius: 5px;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+  margin-top: 10px;
+  margin-right: auto;
+  display: block; /* Ensure each section is displayed as a block */
 }
 
 /* Input styling for the signup/login page */
 .signup-box input,
 .signup-box select,
 .login-box input,
-.login-box select {
+.login-box select,
+.ongoing-bills h2,
+.ongoing-bills p,
+.ongoing-bills div {
   width: 100%;
-  padding: 8px; 
-  margin-bottom: 8px; 
+  margin-left: -6.5px;
+  padding: 8px;
+  margin-bottom: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 14px;
 }
 
-/* Button styling for the signup/login page */
+/* Button styling for the signup/login/ongoing-bills page */
 .signup-box button,
-.login-box button {
+.login-box button,
+.ongoing-bills button {
   width: 100%;
-  padding: 10px; 
-  background-color: #4caf50;
+  padding: 10px;
+  background-color: #32ee38;
   color: white;
   font-size: 16px;
-  font-weight: bold;
+  font-weight: bold, #ffffff;
   border: none;
+  margin-bottom: 10px;
+  margin-top: 10px;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
 
-/* Hover effect for the signup/login button */
+/* Hover effect for the signup/login/ongoing-bills button */
 .signup-box button:hover,
-.login-box button:hover {
-  background-color: #45a049;
-}
-/* Ongoing Bills styling */
-.ongoing-bills {
-  display: block;
-  text-decoration: none;
-  color: #333;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 15px;
-  margin: 10px 0;
-  transition: box-shadow 0.3s ease-in-out;
+.login-box button:hover,
+.ongoing-bills button:hover {
+  background-color: #080d08;
 }
 
-.ongoing-bills:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+/* Ongoing Bills styling */
+.ongoing-bills h1 {
+  margin-top: 100%;
 }
 
 .ongoing-bills h2 {
-  font-size: 1.5em;
+  font-size: 18px;
   margin-bottom: 10px;
 }
 
 .ongoing-bills p {
   margin-bottom: 5px;
+  font-size: 18px;
 }
 
 .ongoing-bills div {
   margin-top: 10px;
-  font-weight: bold;
-}
-
-/* Page heading */
-h1 {
-  text-align: center;
-  color: #333;
-}
-
-/* Container styling */
-.container {
-  max-width: 800px;
-  margin: 20px auto; 
-  padding: 20px;
+  font-size: 14px;
+  color: #777;
 }
 
 /* General styles */
 body {
   font-family: 'Arial', sans-serif;
-  background-image: url('https://images.unsplash.com/photo-1554034483-04fda0d3507b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-image: url('./assets/Free\ Gradient\ Backgrounds\ \(Community\)_page-0001.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   height: 100vh;
   margin: 0;
   padding: 0;
-  overflow-x: hidden; 
-  background-attachment: fixed; 
+  overflow: auto;
+  background-attachment: fixed;
 }
-
-
 
 /* BillForm styling */
 .form-container {
-  max-width: 600px; 
+  max-width: 600px;
   width: 120%;
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 253, 253, 0.254);
   padding: 50px;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  margin: 20px auto; 
+  margin: 20px auto;
 }
 
 .form-group {
   margin-bottom: 1px;
-  margin-top: 1px; 
+  margin-top: 1px;
 }
 
 input,
 textarea {
   width: 100%;
-  padding: 10px; 
-  margin-top: 1px; 
+  padding: 10px;
+  margin-left: -8.5px;
+  margin-top: 1px;
   margin-bottom: 10px;
   border: 2px solid #3498db;
   border-radius: 5px;
-  font-size: 14px; 
+  font-size: 14px;
 }
 
 button {
   width: 100%;
+  margin-top: 10px;
   padding: 10px;
   background-color: #4caf50;
   color: white;
@@ -256,25 +301,44 @@ button {
   transition: background-color 0.3s ease-in-out;
 }
 
-button:hover {
+/* BillDetails.css*/
+.bill-details-container {
+  margin-top: 10px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.555);
+  background-color: #ffffff42;
+}
+
+.bill-details-container h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.bill-details-container p {
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.bill-details-container button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.bill-details-container button:hover {
   background-color: #45a049;
 }
 
-.user-sections {
-  display: flex;
-  justify-content: flex-end; 
-}
-
-/* Sign In button styling */
-.signIn-Button {
-  margin-right: 20px; 
-}
-
-/* Add this CSS to move the existing user sign in to the top right corner */
-.user-sections {
-  position: absolute;
-  top: 20px; 
-  right: 20px; 
+.bill-details-container p.vote-message {
+  font-weight: bold;
+  color: #333;
 }
 
 
