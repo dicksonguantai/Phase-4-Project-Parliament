@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const BillForm = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +10,24 @@ const BillForm = () => {
     constituency: '',
   });
 
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch('/check_session')
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.id) {
+          setUser(data);
+          console.log('Session active for:', data.email);
+        } else {
+          console.log(data.message);
+        }
+      })
+      .catch((error) => {
+        console.log('Error fetching user role:', error.message);
+      });
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -19,7 +37,7 @@ const BillForm = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://127.0.0.1:5000/bills', {
+      const response = await fetch('/bills', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,7 +63,8 @@ const BillForm = () => {
           constituency: '',
         });
       } else {
-        console.error('Failed to submit bill');
+        const errorData = await response.json();
+        console.error('Failed to submit bill:', errorData.message);
       }
     } catch (error) {
       console.error('Error:', error.message);
@@ -55,6 +74,7 @@ const BillForm = () => {
   return (
     <div className="form-container">
       <h2>Bill Proposal Form</h2>
+      {user && <p>Welcome, {user.first_name}!</p>}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="title">Title:</label>
