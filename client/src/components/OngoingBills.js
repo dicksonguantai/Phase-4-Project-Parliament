@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import NavBar from '../components/NavBar';
 
 function OngoingBills() {
   const [bills, setBills] = useState([]);
@@ -11,7 +12,7 @@ function OngoingBills() {
         if (response.ok) {
           return response.json();
         } else {
-          throw new Error('Error fetching user role');
+          console.log('Error fetching user role');
         }
       })
     const fetchData = async () => {
@@ -32,7 +33,8 @@ function OngoingBills() {
   }, []); 
 
   return (
-    <div>
+    <div className="ongoing-bills-container">
+      <NavBar />
       <h1>Ongoing Bills</h1>
       {bills.map((bill) => (
         <Link to={`/bills/${bill.id}`} key={bill.id} className="ongoing-bills">

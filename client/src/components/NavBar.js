@@ -1,18 +1,8 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function NavBar () {
-
-    useEffect(() => {
-        fetch('/check_session')
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Error fetching user role');
-            }
-        })
-    }, []);
+    const navigate = useNavigate();
 
     function handleLogout() {
         fetch('/logout', {
@@ -20,7 +10,8 @@ function NavBar () {
         })
         .then((response) => {
             if (response.ok) {
-                window.location.href = '/';
+                navigate('/');
+                alert('Logged out successfully');
             } else {
                 throw new Error('Error logging out');
             }
